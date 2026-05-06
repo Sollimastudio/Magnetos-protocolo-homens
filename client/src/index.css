@@ -1,0 +1,341 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* DESIGN PHILOSOPHY: Luxo Sensorial com Drama
+   - Paleta: Preto Profundo (#050505) + Ouro Gradiente (#D4AF37) + Burgundy (#4A0404)
+   - Tipografia: Playfair Display (elegância) + Inter (modernidade)
+   - Atmosfera: Sofisticada, provocadora, sensorial
+   - Efeitos: Glass-morphism, gradientes, texturas, animações fluidas
+*/
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --gold: #D4AF37;
+  --gold-light: #FBF5B7;
+  --burgundy: #4A0404;
+  --deep-black: #050505;
+  --silk-gradient: linear-gradient(135deg, #1a0101 0%, #4A0404 100%);
+  
+  --primary: var(--gold);
+  --primary-foreground: #000;
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: #000;
+  --chart-1: #D4AF37;
+  --chart-2: #AA771C;
+  --chart-3: #BF953F;
+  --chart-4: #8B6914;
+  --chart-5: #6B5310;
+  --radius: 0.65rem;
+  --background: #050505;
+  --foreground: #F5F5DC;
+  --card: #0a0a0a;
+  --card-foreground: #F5F5DC;
+  --popover: #0a0a0a;
+  --popover-foreground: #F5F5DC;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #D4AF37;
+  --muted: #2a2a2a;
+  --muted-foreground: #999;
+  --accent: #D4AF37;
+  --accent-foreground: #000;
+  --destructive: #ef4444;
+  --destructive-foreground: #fff;
+  --border: #1a1a1a;
+  --input: #0a0a0a;
+  --ring: #D4AF37;
+  --sidebar: #050505;
+  --sidebar-foreground: #F5F5DC;
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: #000;
+  --sidebar-border: #1a1a1a;
+  --sidebar-ring: #D4AF37;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+  @apply border-border outline-ring/50;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  background-color: #050505;
+  color: #F5F5DC;
+}
+
+h1, h2, h3, h4, h5, h6, .serif {
+  font-family: 'Playfair Display', serif;
+}
+
+/* GOLD TEXT GRADIENT */
+.gold-text {
+  background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* SILK BACKGROUND WITH TEXTURE */
+.bg-silk {
+  background: var(--silk-gradient);
+  position: relative;
+}
+
+.bg-silk::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('https://www.transparenttextures.com/patterns/black-linen.png');
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* GOLD BUTTON */
+.btn-gold {
+  background: linear-gradient(180deg, #D4AF37 0%, #AA771C 100%);
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 10px 20px rgba(170, 119, 28, 0.2);
+}
+
+.btn-gold:hover:not(:disabled) {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(170, 119, 28, 0.4);
+  filter: brightness(1.1);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* GLASS CARD - FROSTED GLASS EFFECT */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 32px;
+}
+
+/* REVEAL ANIMATION - SCROLL TRIGGER */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SILK WAVE ANIMATION */
+.silk-wave {
+  animation: wave 20s infinite alternate linear;
+}
+
+@keyframes wave {
+  from { transform: translateX(-10%) skewX(-5deg); }
+  to { transform: translateX(10%) skewX(5deg); }
+}
+
+/* AI RESPONSE BOX */
+.ai-response-box {
+  border-left: 3px solid var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+/* LOADING SPINNER */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #000;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* FADE IN ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* PULSE ANIMATION FOR GOLD DOTS */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* SCALE UP ANIMATION */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.6s ease-out;
+}
+
+/* SLIDE IN FROM LEFT */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+/* SLIDE IN FROM RIGHT */
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out;
+}
+
+/* GLOW EFFECT */
+.glow-gold {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
+}
+
+.glow-gold-hover:hover {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* CONTAINER UTILITY */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.flex {
+  min-height: 0;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    max-width: 1280px;
+  }
+}
+
+/* RESPONSIVE TEXT */
+@media (max-width: 768px) {
+  h1 {
+    @apply text-4xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+}
+
+/* SMOOTH SCROLL */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ANTIALIASED TEXT */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
